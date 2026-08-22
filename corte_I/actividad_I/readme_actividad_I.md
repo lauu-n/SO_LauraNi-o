@@ -18,7 +18,8 @@ $ cd "ubicación"
 ```
 $ python3 semaforo_algoritmo_banquero.py
 ```
-<img width="614" height="97" alt="image" src="https://github.com/user-attachments/assets/daf26a72-c3ac-4a27-b88d-d595a59d150d" />
+<img width="814" height="197" alt="Screenshot 2026-08-22 105429" src="https://github.com/user-attachments/assets/aa24c985-30c0-4265-a032-6f44ab6acd95" />
+
 
 ---
 
@@ -210,6 +211,9 @@ Tiempo total teórico: 75 minutos
 Estado del sistema: SEGURO 
 ```
 
+<img width="799" height="633" alt="image" src="https://github.com/user-attachments/assets/55554738-8b65-4002-bf10-4400b07e698c" />
+
+
 ---
 
 ### Algoritmo del Banquero aplicado
@@ -239,6 +243,7 @@ Estado del sistema: SEGURO
     - Prevención de deadlocks en sistemas multitarea.
 
 **1. Datos del problema**
+   
    Tiempo que tarda cada carro en cambiar de sentido: 30 segundos.
    
    |     Dato     | Valor |
@@ -253,6 +258,7 @@ Estado del sistema: SEGURO
 
 
 **2. Matriz de procesos**
+   
    Reconocer cada sentido como un proceso.
    
    | Proceso | Sentido | Cantidad de carros |
@@ -263,6 +269,7 @@ Estado del sistema: SEGURO
    |   P3    |  D → C  |         100        |
    
 **3. Matriz de recurso**
+   
    Los recursos representan los cuatro carriles que tenemos en la intersección.
    
    | Recurso | Representa | Capacidad |
@@ -275,6 +282,7 @@ Estado del sistema: SEGURO
    La capacidad es 1 porque, un carro demora 30 segundos en pasar de un lado al otro, por lo que no puede entrar otro carro en ese mismo sentido durante ese período de tiempo.
 
 **4. Matriz Max**
+   
    Indica el máximo recurso que necesita cada proceso.
    
    |  Proceso | R1 A→B | R2 B→A | R3 C→D | R4 D→C |
@@ -285,6 +293,7 @@ Estado del sistema: SEGURO
    | P3 D → C |    0   |    0   |    0   |    1   |
    
 **5. Matriz Allocation Inicial**
+   
    Al comenzar, ningún carro está dentro de la intersección.
    
    |  Proceso | R1 A→B | R2 B→A | R3 C→D | R4 D→C |
@@ -295,6 +304,7 @@ Estado del sistema: SEGURO
    | P3 D → C |    0   |    0   |    0   |    0   |
 
 **6. Matriz Need**
+   
    La fórmula:
    ```
    NEED = MAX - ALLOCATION
@@ -310,6 +320,7 @@ Estado del sistema: SEGURO
    | P3 D → C |    0   |    0   |    0   |    1   |
 
 **7. Vector AVAILABLE**
+   
    Al inicio, todos los recursos están libres.
    
    | R1 A→B | R2 B→A | R3 C→D | R4 D→C |
@@ -320,6 +331,7 @@ Estado del sistema: SEGURO
    *Available = (1, 1, 1, 1)**
 
 **8. Tabla de comprobación del Banquero**
+   
    ```
    Need ≤ Work
    ```
@@ -348,9 +360,10 @@ Estado del sistema: SEGURO
    Solo puede estar uno activo a la vez.
 
 **10. Carros por fase horizontal**
-    - A→B: 50 carros
-    - B→A: 35 carros
-    Se necesitan como máximo 50 turnos horizontales.
+  
+- A→B: 50 carros
+- B→A: 35 carros
+Se necesitan como máximo 50 turnos horizontales.
 
    | Fase | A→B | B→A | Duración (s)|
    |------|-----|-----|-------------|
@@ -370,9 +383,10 @@ Estado del sistema: SEGURO
    Así que al terminar los 50 turnos, todos los carros habrán pasado al otro lado.
 
 **11. Carros por fase vertical**
-    - C→D: 20 carros
-    - D→C: 100 carros
-    Se necesitan 100 turnos verticales.
+    
+- C→D: 20 carros
+- D→C: 100 carros
+Se necesitan 100 turnos verticales.
 
    | Fase  | C→D | D→C | Duración (s)|
    |-------|-----|-----|-------------|
@@ -401,6 +415,7 @@ Estado del sistema: SEGURO
    En este caso, hay 150 turnos porque dos carros pueden pasar simultáneamente cuando van en sentidos opuestos (A→B + B→A y C→D + D→C). Por consiguiente, la cantidad de turnos será menor que la cantidad de vehículos.
 
 **13. Tabla de ejecución propuesta**
+ 
   - Se utilizan intervalos de 10 carros por sentido hasta finalizar las colas, con el objetivo de disminuir el tiempo de espera. De esta manera, los vehículos que circulan en sentido vertical no tienen que esperar a que todos los vehículos del sentido horizontal terminen de pasar, sino que ambos grupos van alternando su paso.
 
    | Fase | Semáforo verde | A→B | B→A | C→D | D→C | Tiempo (minutos)|
@@ -439,7 +454,8 @@ Estado del sistema: SEGURO
    |    Tiempo    |          30 segundos por carro                 |
 
 **14. Implementación mediante hilos**
-    Se utilizaron cuatro (4) hilos.
+    
+Se utilizaron cuatro (4) hilos.
 
    | Hilo | Sentido |
    |------|---------|
